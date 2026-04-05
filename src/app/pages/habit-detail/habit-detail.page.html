@@ -1,0 +1,59 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/habits"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary">
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Fetching habit details...</p>
+  </div>
+
+  <div *ngIf="!isLoading && habit" class="habit-detail-container">
+    <div class="habit-header">
+      <div class="category-chip">{{ habit.category }}</div>
+      <h1>{{ habit.name }}</h1>
+      <p class="description">{{ habit.description || 'No description provided.' }}</p>
+      
+      <div class="status-action">
+        <div class="status-text">
+          <span class="label">Status Today</span>
+          <span class="value" [ngClass]="{'done': habit.completedToday}">
+            {{ habit.completedToday ? 'Completed' : 'Pending' }}
+          </span>
+        </div>
+        <ion-toggle [checked]="habit.completedToday" (ionChange)="onToggleStatus($event.detail.checked)" color="success"></ion-toggle>
+      </div>
+    </div>
+
+    <div class="history-section">
+      <div class="section-title">
+        <h3>History</h3>
+        <ion-button fill="clear" size="small">Last 30 Days</ion-button>
+      </div>
+
+      <ion-list lines="inset">
+        <ion-item *ngFor="let log of history" class="history-item">
+          <ion-icon slot="start" [name]="log.isCompleted ? 'checkmark-circle' : 'close-circle-outline'" [color]="log.isCompleted ? 'success' : 'medium'"></ion-icon>
+          <ion-label>
+            <h2>{{ formatDate(log.date) }}</h2>
+            <p>{{ log.isCompleted ? 'Goal achieved!' : 'Not completed' }}</p>
+          </ion-label>
+        </ion-item>
+        
+        <div *ngIf="history.length === 0" class="empty-history">
+          <p>No logged activities yet.</p>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

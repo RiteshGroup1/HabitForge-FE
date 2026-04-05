@@ -1,0 +1,43 @@
+.reports-container {
+  padding: 24px 16px;
+  background: #f8f9fa;
+  min-height: 100%;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 28px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
+
+  .chart-header {
+    margin-bottom: 20px;
+    h3 { font-size: 18px; font-weight: 800; color: #333; margin: 0; }
+    p { font-size: 13px; color: #999; margin-top: 4px; font-weight: 600; }
+  }
+
+  .chart-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+  }
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  .stat-mini {
+    background: #fff;
+    padding: 20px;
+    border-radius: 24px;
+    text-align: center;
+    border: 1px solid #eee;
+
+    .value { display: block; font-size: 24px; font-weight: 800; color: #667eea; }
+    .label { font-size: 12px; color: #999; text-transform: uppercase; font-weight: 700; }
+  }
+}

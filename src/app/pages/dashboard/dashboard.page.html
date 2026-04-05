@@ -1,0 +1,102 @@
+<ion-content [fullscreen]="true">
+  <!-- Dynamic Gradient Background -->
+  <div class="bg-gradient"></div>
+
+  <!-- Header Banner -->
+  <div class="header-banner">
+    <div class="welcome-row">
+      <div class="welcome-text">
+        <p>Good morning,</p>
+        <h2>{{ user?.name || 'Warrior' }}</h2>
+      </div>
+      <div class="streak-badge" routerLink="/progress">
+         <span class="icon">🔥</span>
+         <span class="value">{{ user?.currentStreak || 0 }}</span>
+      </div>
+    </div>
+
+    <!-- Gamification Stats -->
+    <div class="stats-card">
+      <div class="level-indicator">
+        <div class="level-circle">
+          <span class="label">LVL</span>
+          <span class="value">{{ user?.currentLevel || 1 }}</span>
+        </div>
+      </div>
+      <div class="xp-container">
+        <div class="xp-header">
+          <span class="xp-title">Experience Points</span>
+          <span class="xp-value">{{ user?.xpProgress || 0 }}%</span>
+        </div>
+        <div class="xp-bar-outer">
+          <div class="xp-bar-inner" [style.width.%]="user?.xpProgress || 0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Today's Progress Overview -->
+  <div class="section-title">
+    <h3>Today's Progress</h3>
+    <span class="percentage">{{ completionPercentage | number: '1.0-0' }}%</span>
+  </div>
+
+  <div class="progress-box">
+    <div class="progress-info">
+      <p>{{ habitsRemaining }} habits remaining</p>
+    </div>
+    <ion-progress-bar [value]="completionPercentage / 100" color="secondary" class="main-progress"></ion-progress-bar>
+  </div>
+
+  <!-- Today's Habits List -->
+  <div class="habits-section">
+    <div class="section-header">
+      <h3>Active Habits</h3>
+      <ion-button fill="clear" size="small" routerLink="/habits">View All</ion-button>
+    </div>
+
+    <div class="habit-list" *ngIf="!isLoading">
+      <div class="habit-card" *ngFor="let habit of todayHabits" 
+           [class.completed]="habit.completedToday"
+           (click)="toggleHabit(habit)">
+        <div class="habit-icon-box" [style.background-color]="habit.completedToday ? '#4ade80' : '#f1f5f9'">
+          <ion-icon [name]="habit.completedToday ? 'checkmark' : 'flash-outline'" 
+                    [color]="habit.completedToday ? 'light' : 'primary'"></ion-icon>
+        </div>
+        <div class="habit-info">
+          <h4>{{ habit.name }}</h4>
+          <p>{{ habit.category }}</p>
+        </div>
+        <div class="habit-status">
+           <div class="check-box" [class.checked]="habit.completedToday">
+             <ion-icon name="checkmark-done" *ngIf="habit.completedToday"></ion-icon>
+           </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="todayHabits.length === 0">
+        <div class="empty-icon-wrapper">
+          <ion-icon name="sparkles-outline"></ion-icon>
+        </div>
+        <h4>Start Your Journey</h4>
+        <p>No habits tracked for today yet. Add your first goal to begin forging your future.</p>
+        <ion-button expand="block" fill="solid" color="primary" class="add-button" routerLink="/habits">
+          + Add New Habit
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Skeleton Loading -->
+    <div class="skeleton-list" *ngIf="isLoading">
+      <div class="habit-card skeleton" *ngFor="let i of [1,2,3]">
+        <ion-skeleton-text animated style="width: 48px; height: 48px; border-radius: 12px;"></ion-skeleton-text>
+        <div class="habit-info">
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+

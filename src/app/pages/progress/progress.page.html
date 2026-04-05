@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Level & Progress</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-vertical">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="level-container" *ngIf="user">
+    <div class="badge-wrapper">
+      <div class="level-badge-large">
+        <ion-icon name="trophy"></ion-icon>
+        <span class="level-num">{{ user.currentLevel }}</span>
+      </div>
+    </div>
+    
+    <div class="progress-info">
+      <h2>Level {{ user.currentLevel }}</h2>
+      <p class="points-total">{{ user.totalPoints }} Total XP</p>
+      
+      <div class="xp-progress-bar">
+        <div class="progress-labels">
+          <span>{{ user.xpProgress }}% XP to next level</span>
+          <span>{{ user.currentLevel + 1 }}</span>
+        </div>
+        <ion-progress-bar [value]="user.xpProgress / 100" color="warning"></ion-progress-bar>
+      </div>
+
+      <div class="streak-box">
+        <div class="streak-fire">
+          <ion-icon name="flame"></ion-icon>
+          <div class="streak-num">{{ user.currentStreak }}</div>
+        </div>
+        <div class="streak-label">Day Streak</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestones-section">
+    <ion-list-header>
+      <ion-label>Next Milestones</ion-label>
+    </ion-list-header>
+    
+    <ion-card class="milestone-card disabled">
+      <ion-card-content>
+        <ion-icon slot="start" icon="lock-closed-outline"></ion-icon>
+        <div class="milestone-info">
+          <h3>The Habit Master</h3>
+          <p>Complete 100 habits in total</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card class="milestone-card disabled">
+      <ion-card-content>
+        <ion-icon slot="start" icon="lock-closed-outline"></ion-icon>
+        <div class="milestone-info">
+          <h3>Unstoppable Blaze</h3>
+          <p>Reach a 30-day streak</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Your Forge</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addHabit()" class="add-header-btn">
+        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="habits-header-content">
+    <h1>All Habits</h1>
+    <p>Manage and track your long-term consistency.</p>
+  </div>
+
+  <div class="habits-container">
+    <div *ngIf="isLoading" class="loading-container">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p>Consulting the scrolls...</p>
+    </div>
+
+    <div *ngIf="!isLoading && habits.length > 0" class="habit-cards">
+      <ion-item-sliding *ngFor="let habit of habits" class="habit-slide">
+        <div class="habit-card-wrapper" [routerLink]="['/habit-detail', habit.id]">
+          <div class="card-icon">
+             <ion-icon name="journal-outline" color="primary"></ion-icon>
+          </div>
+          <div class="card-content">
+            <h3>{{ habit.name }}</h3>
+            <div class="card-meta">
+              <span class="category">{{ habit.category }}</span>
+              <span class="dot">•</span>
+              <span class="freq">{{ habit.frequency }}</span>
+            </div>
+          </div>
+          <div class="card-chevron">
+            <ion-icon name="chevron-forward"></ion-icon>
+          </div>
+        </div>
+
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="deleteHabit(habit.id!)" class="delete-opt">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && habits.length === 0">
+      <div class="empty-icon-box">
+        <ion-icon name="leaf-outline"></ion-icon>
+      </div>
+      <h2>First Seed</h2>
+      <p>Every great forest begins with a single seed. Start growing your habits today.</p>
+      <ion-button expand="block" (click)="addHabit()" color="primary" class="create-btn">
+        Create Habit
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
+

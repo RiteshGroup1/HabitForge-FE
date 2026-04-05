@@ -1,0 +1,68 @@
+/* Premium Theme for HabitForge */
+:root {
+  /** Primary - Indigo/Vibrant Blue **/
+  --ion-color-primary: #6366f1;
+  --ion-color-primary-rgb: 99, 102, 241;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #575ade;
+  --ion-color-primary-tint: #7375f2;
+
+  /** Secondary - Vibrant Purple **/
+  --ion-color-secondary: #a855f7;
+  --ion-color-secondary-rgb: 168, 85, 247;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #944bda;
+  --ion-color-secondary-tint: #b166f8;
+
+  /** Success - Emerald/Green **/
+  --ion-color-success: #10b981;
+  --ion-color-success-rgb: 16, 185, 129;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #0ea372;
+  --ion-color-success-tint: #28c08e;
+
+  /** Warning - Amber/Yellow **/
+  --ion-color-warning: #f59e0b;
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: #d88b0a;
+  --ion-color-warning-tint: #f6a824;
+
+  /** Danger - Rose/Red **/
+  --ion-color-danger: #f43f5e;
+  --ion-color-danger-rgb: 244, 63, 94;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #d73753;
+  --ion-color-danger-tint: #f5526e;
+
+  /** Medium - Slate/Gray **/
+  --ion-color-medium: #64748b;
+  --ion-color-medium-rgb: 100, 116, 139;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #58667a;
+  --ion-color-medium-tint: #748297;
+
+  /** Light - Cloud/Off-white **/
+  --ion-color-light: #f8fafc;
+  --ion-color-light-rgb: 248, 250, 252;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #da99e1;
+  --ion-color-light-tint: #f9fbfe;
+
+  /** Layout Shadows & Glassmorphism **/
+  --forge-glass-bg: rgba(255, 255, 255, 0.1);
+  --forge-glass-border: rgba(255, 255, 255, 0.2);
+  --forge-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --forge-header-shadow: 0 10px 40px rgba(99, 102, 241, 0.15);
+}
+
+body {
+  --ion-font-family: 'Inter', system-ui, sans-serif;
+}

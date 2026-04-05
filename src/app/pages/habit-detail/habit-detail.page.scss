@@ -1,0 +1,95 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  color: #999;
+  
+  ion-spinner { width: 48px; height: 48px; margin-bottom: 16px; }
+  p { font-weight: 500; }
+}
+
+.habit-header {
+  padding: 30px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 0 0 40px 40px;
+  box-shadow: 0 10px 40px rgba(118, 75, 162, 0.2);
+  margin-bottom: 24px;
+
+  .category-chip {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+  }
+
+  h1 { font-size: 32px; font-weight: 800; margin: 0 0 10px; }
+  
+  .description { font-size: 16px; opacity: 0.9; margin-bottom: 30px; font-weight: 500; line-height: 1.5; }
+
+  .status-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 16px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    .status-text {
+      display: flex;
+      flex-direction: column;
+
+      .label { font-size: 11px; font-weight: 800; text-transform: uppercase; opacity: 0.7; }
+      .value { 
+        font-size: 18px; font-weight: 700; 
+        &.done { color: #58cc02; text-shadow: 0 0 10px rgba(88, 204, 2, 0.3); }
+      }
+    }
+
+    ion-toggle {
+      --handle-background: #fff;
+      --handle-background-checked: #fff;
+      --background: rgba(255,255,255,0.2);
+    }
+  }
+}
+
+.history-section {
+  padding: 0 16px 30px;
+
+  .section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h3 { font-size: 20px; font-weight: 800; margin: 0; color: #333; }
+    ion-button { font-weight: 700; font-size: 14px; }
+  }
+
+  .history-item {
+    --background: white;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    border: 1px solid #eee;
+
+    h2 { font-weight: 700; color: #333; }
+    p { font-weight: 500; color: #999; font-size: 13px; }
+    ion-icon { font-size: 24px; }
+  }
+}
+
+.empty-history {
+  padding: 40px;
+  text-align: center;
+  color: #999;
+  font-weight: 600;
+}

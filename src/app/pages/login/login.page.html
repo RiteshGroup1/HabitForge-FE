@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="login-wrapper">
+    <div class="circles-container">
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
+    </div>
+    
+    <div class="content-box">
+      <div class="brand">
+        <div class="logo-box">🔥</div>
+        <h1>HabitForge</h1>
+        <p>Forge a better version of yourself, one day at a time.</p>
+      </div>
+
+      <div class="action-area">
+        <div *ngIf="isLoading; else loginBtn" class="loading-state">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+          <p>Signing into the forge...</p>
+        </div>
+        
+        <ng-template #loginBtn>
+          <ion-button expand="block" (click)="onGoogleLogin()" class="google-btn">
+            <ion-icon slot="start" name="logo-google"></ion-icon>
+            Login with Google
+          </ion-button>
+          
+          <p class="terms">By continuing, you agree to our <span>Terms of Service</span> and <span>Privacy Policy</span>.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,114 @@
+ion-toolbar {
+  --background: transparent;
+  --color: #1e293b;
+  padding: 10px 10px 0;
+}
+
+.add-header-btn {
+  ion-icon { font-size: 30px; color: var(--ion-color-primary); }
+}
+
+ion-content {
+  --background: #f8fafc;
+}
+
+.habits-header-content {
+  padding: 30px 24px;
+  h1 { font-size: 32px; font-weight: 800; color: #1e293b; margin: 0 0 8px; }
+  p { font-size: 16px; color: #64748b; font-weight: 500; margin: 0; }
+}
+
+.habits-container {
+  padding: 0 20px 40px;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 40px 0;
+  p { margin-top: 15px; color: #64748b; font-weight: 600; }
+}
+
+.habit-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.habit-slide {
+  background: transparent;
+  margin-bottom: 16px;
+}
+
+.habit-card-wrapper {
+  background: white;
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:active { transform: scale(0.98); background: #f1f5f9; }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    background: #eef2ff;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ion-icon { font-size: 22px; }
+  }
+
+  .card-content {
+    flex: 1;
+    h3 { font-size: 18px; font-weight: 700; color: #1e293b; margin: 0 0 6px; }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 600;
+
+      .category { color: var(--ion-color-primary); }
+      .freq { font-weight: 500; }
+    }
+  }
+
+  .card-chevron {
+    color: #cbd5e1;
+    font-size: 20px;
+  }
+}
+
+.delete-opt {
+  --border-radius: 0 24px 24px 0;
+  margin-left: -24px;
+  z-index: 1;
+}
+
+.empty-state {
+  padding: 60px 40px;
+  text-align: center;
+
+  .empty-icon-box {
+    width: 100px;
+    height: 100px;
+    background: #f0fdf4;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    ion-icon { font-size: 48px; color: var(--ion-color-success); }
+  }
+
+  h2 { font-size: 24px; font-weight: 800; color: #1e293b; margin-bottom: 12px; }
+  p { font-size: 16px; color: #64748b; line-height: 1.5; margin-bottom: 32px; }
+  .create-btn { --border-radius: 16px; font-weight: 700; height: 54px; }
+}

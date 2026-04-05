@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Category Analytics</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="category-grid" *ngIf="!isLoading">
+    <ion-card *ngFor="let item of analytics" class="category-card">
+      <ion-card-header>
+        <div class="cat-header">
+          <ion-icon [name]="item.icon || 'star'" [style.color]="item.color || '#3880ff'"></ion-icon>
+          <ion-card-title>{{ item.category }}</ion-card-title>
+        </div>
+        <ion-card-subtitle>{{ item.streak }} Day Streak</ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="percentage">{{ item.successRate }}%</div>
+        <div class="label">Success Rate</div>
+        <ion-progress-bar [value]="item.successRate / 100" [style.color]="item.color || '#3880ff'"></ion-progress-bar>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Crunching numbers...</p>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && analytics.length === 0">
+    <ion-icon name="analytics-outline"></ion-icon>
+    <p>Track more habits to see analytics!</p>
+  </div>
+</ion-content>
