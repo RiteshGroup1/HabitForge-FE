@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user.model';
+import { User, UserProgress } from '../../models/user.model';
+import { ProgressService } from '../../services/progress.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-progress',
@@ -10,14 +12,27 @@ import { User } from '../../models/user.model';
 })
 export class ProgressPage implements OnInit {
   user: User | null = null;
+  progress: UserProgress | null = null;
   isLoading = true;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private progressService: ProgressService
+  ) {}
 
   ngOnInit() {
-    this.authService.user$.subscribe({
-      next: (user) => {
-        this.user = user;
+    this.loadData();
+  }
+
+  loadData() {
+    this.isLoading = true;
+    combineLatest({
+      user: this.authService.user$,
+      progress: this.progressService.fetchProgress()
+    }).subscribe({
+      next: (data) => {
+        this.user = data.user;
+        this.progress = data.progress;
         this.isLoading = false;
       },
       error: () => (this.isLoading = false)
@@ -25,8 +40,9 @@ export class ProgressPage implements OnInit {
   }
 
   doRefresh(event: any) {
-    this.authService.fetchUserProfile().subscribe(() => {
+    this.loadData();
+    setTimeout(() => {
       event.target.complete();
-    });
+    }, 1000);
   }
 }

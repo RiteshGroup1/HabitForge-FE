@@ -60,7 +60,7 @@ export class AuthService {
   }
 
   fetchUserProfile(): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/auth/profile`).pipe(
+    return this.http.get<User>(`${environment.apiUrl}/user/profile`).pipe( // Mapping to backend profile if it exists
       tap(user => this.userSubject.next(user)),
       catchError(err => {
         this.logout();

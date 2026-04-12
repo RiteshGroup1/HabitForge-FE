@@ -9,30 +9,30 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="level-container" *ngIf="user">
+  <div class="level-container" *ngIf="progress">
     <div class="badge-wrapper">
       <div class="level-badge-large">
         <ion-icon name="trophy"></ion-icon>
-        <span class="level-num">{{ user.currentLevel }}</span>
+        <span class="level-num">{{ progress.level }}</span>
       </div>
     </div>
     
     <div class="progress-info">
-      <h2>Level {{ user.currentLevel }}</h2>
-      <p class="points-total">{{ user.totalPoints }} Total XP</p>
+      <h2>Level {{ progress.level }}</h2>
+      <p class="points-total">{{ progress.totalPoints }} Total Points</p>
       
       <div class="xp-progress-bar">
         <div class="progress-labels">
-          <span>{{ user.xpProgress }}% XP to next level</span>
-          <span>{{ user.currentLevel + 1 }}</span>
+          <span>{{ (progress.totalPoints % 100) }}% XP to next level</span>
+          <span>{{ progress.level + 1 }}</span>
         </div>
-        <ion-progress-bar [value]="user.xpProgress / 100" color="warning"></ion-progress-bar>
+        <ion-progress-bar [value]="(progress.totalPoints % 100) / 100" color="warning"></ion-progress-bar>
       </div>
 
       <div class="streak-box">
         <div class="streak-fire">
           <ion-icon name="flame"></ion-icon>
-          <div class="streak-num">{{ user.currentStreak }}</div>
+          <div class="streak-num">{{ progress.currentStreak }}</div>
         </div>
         <div class="streak-label">Day Streak</div>
       </div>

@@ -43,10 +43,10 @@
 
       <ion-list lines="inset">
         <ion-item *ngFor="let log of history" class="history-item">
-          <ion-icon slot="start" [name]="log.isCompleted ? 'checkmark-circle' : 'close-circle-outline'" [color]="log.isCompleted ? 'success' : 'medium'"></ion-icon>
+          <ion-icon slot="start" [name]="log.status ? 'checkmark-circle' : 'close-circle-outline'" [color]="log.status ? 'success' : 'medium'"></ion-icon>
           <ion-label>
             <h2>{{ formatDate(log.date) }}</h2>
-            <p>{{ log.isCompleted ? 'Goal achieved!' : 'Not completed' }}</p>
+            <p>{{ log.status ? 'Goal achieved!' : 'Not completed' }}</p>
           </ion-label>
         </ion-item>
         

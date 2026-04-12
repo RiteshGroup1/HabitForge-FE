@@ -1,23 +1,16 @@
-export interface WeeklyReport {
-  weekStarting: string;
-  data: number[]; // counts of completed habits per day Mon-Sun
-  labels: string[]; // ["Mon", "Tue", ...]
-  totalCompleted: number;
+export interface Report {
+  startDate: string;
+  endDate: string;
+  totalDays: number;
+  completedDays: number;
   successRate: number;
+  dailyProgress: DailyProgress[];
+  categoryPerformance: Map<string, number>;
 }
 
-export interface MonthlyReport {
-  month: string;
-  year: number;
-  totalCompleted: number;
-  completionRate: number;
-  data: { date: string; count: number }[];
-}
-
-export interface CategoryAnalytics {
-  category: string;
+export interface DailyProgress {
+  date: string;
+  totalHabits: number;
+  completedHabits: number;
   successRate: number;
-  streak: number;
-  color: string;
-  icon: string;
 }

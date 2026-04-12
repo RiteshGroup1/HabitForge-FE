@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HabitService } from '../../services/habit.service';
 import { AuthService } from '../../services/auth.service';
-import { Habit, HabitLog } from '../../models/habit.model';
-import { User } from '../../models/user.model';
+import { Habit, HabitLog, TodayStats } from '../../models/habit.model';
+import { User, UserProgress } from '../../models/user.model';
+import { ProgressService } from '../../services/progress.service';
 import { combineLatest } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -14,14 +15,15 @@ import { take } from 'rxjs/operators';
 })
 export class DashboardPage implements OnInit {
   user: User | null = null;
+  progress: UserProgress | null = null;
   todayHabits: Habit[] = [];
-  completionPercentage: number = 0;
+  todayStats: TodayStats | null = null;
   isLoading = true;
-  habitsRemaining = 0;
 
   constructor(
     private habitService: HabitService,
-    private authService: AuthService
+    private authService: AuthService,
+    private progressService: ProgressService
   ) {}
 
   ngOnInit() {
@@ -31,42 +33,28 @@ export class DashboardPage implements OnInit {
   loadData() {
     this.isLoading = true;
     
-    // Use combineLatest + take(1) so it doesn't wait for completion of the Subjects
     combineLatest({
-      user: this.authService.user$,
-      habits: this.habitService.getHabits()
-    }).pipe(take(1)).subscribe({
+      user: this.authService.user$.pipe(take(1)),
+      habits: this.habitService.getHabits().pipe(take(1)),
+      progress: this.progressService.fetchProgress().pipe(take(1)),
+      stats: this.habitService.getTodayStats().pipe(take(1))
+    }).subscribe({
       next: (data) => {
         this.user = data.user;
         this.todayHabits = data.habits;
-        this.calculateProgress();
+        this.progress = data.progress;
+        this.todayStats = data.stats;
         this.isLoading = false;
       },
       error: () => (this.isLoading = false)
     });
   }
 
-  calculateProgress() {
-    if (this.todayHabits.length === 0) {
-      this.completionPercentage = 0;
-      this.habitsRemaining = 0;
-      return;
-    }
-    const completed = this.todayHabits.filter(h => h.completedToday).length;
-    this.habitsRemaining = this.todayHabits.length - completed;
-    this.completionPercentage = (completed / this.todayHabits.length) * 100;
-  }
-
   toggleHabit(habit: Habit) {
-    const isCompleted = !habit.completedToday;
-    const log: HabitLog = {
-      habitId: habit.id!,
-      date: new Date().toISOString().split('T')[0],
-      isCompleted: isCompleted
-    };
-
-    this.habitService.toggleCompletion(habit.id!, log).subscribe(() => {
-      this.loadData(); // Re-fetch to update streaks/progress
+    const newStatus = !habit.completedToday;
+    
+    this.habitService.logHabit(habit.id, newStatus).subscribe(() => {
+      this.loadData();
     });
   }
 

@@ -53,12 +53,12 @@ export class ReportsPage implements OnInit {
     this.isLoading = true;
     this.reportService.getWeeklyReport().subscribe({
       next: (data) => {
-        // this.barChartData.labels = data.labels;
-        // this.barChartData.datasets[0].data = data.data;
-        this.totalCompleted = data.totalCompleted;
+        // Mapping labels and data if charts were enabled
+        // this.barChartData.labels = data.dailyProgress.map(p => p.date);
+        // this.barChartData.datasets[0].data = data.dailyProgress.map(p => p.successRate);
+        this.totalCompleted = data.completedDays;
         this.successRate = data.successRate;
         this.isLoading = false;
-        // this.chart?.update();
       },
       error: () => (this.isLoading = false)
     });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../services/report.service';
-import { CategoryAnalytics } from '../../models/report.model';
+import { CategoryStats, CategoryPerformance } from '../../models/user.model';
 
 @Component({
   selector: 'app-categories',
@@ -9,7 +9,8 @@ import { CategoryAnalytics } from '../../models/report.model';
   standalone: false
 })
 export class CategoriesPage implements OnInit {
-  analytics: CategoryAnalytics[] = [];
+  stats: CategoryStats | null = null;
+  analytics: CategoryPerformance[] = [];
   isLoading = true;
 
   constructor(private reportService: ReportService) {}
@@ -22,7 +23,8 @@ export class CategoriesPage implements OnInit {
     this.isLoading = true;
     this.reportService.getCategoryAnalytics().subscribe({
       next: (data) => {
-        this.analytics = data;
+        this.stats = data;
+        this.analytics = data.categories;
         this.isLoading = false;
       },
       error: () => (this.isLoading = false)

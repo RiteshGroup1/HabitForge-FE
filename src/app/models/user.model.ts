@@ -1,22 +1,39 @@
 export interface User {
-  id: string;
-  email: string;
+  id: number;
   name: string;
-  photoUrl?: string;
-  totalPoints: number;
-  currentLevel: number;
-  xpProgress: number;
-  currentStreak: number;
+  email: string;
+  provider: 'GOOGLE' | 'LOCAL';
+  createdAt: string;
 }
 
 export interface AuthResponse {
   token: string;
+  type: string;
   user: User;
 }
 
-export interface HabitProgress {
+export interface UserProgress {
+  id: number;
+  totalPoints: number;
+  level: number;
+  currentStreak: number;
+  longestStreak: number;
+  lastUpdated: string;
+  totalCompletedTasks: number;
+  completionRatio: number;
+}
+
+export interface CategoryStats {
+  categories: CategoryPerformance[];
+  strongestCategory: string;
+  weakestCategory: string;
+  insight: string;
+}
+
+export interface CategoryPerformance {
   category: string;
   totalHabits: number;
-  completedHabits: number;
+  completedTasks: number;
   completionRate: number;
+  percentage: number;
 }

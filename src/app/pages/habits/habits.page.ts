@@ -46,11 +46,10 @@ export class HabitListPage implements OnInit {
         { 
           text: 'Add', 
           handler: (data) => {
-            const habit: Habit = { 
+            const habit: any = { 
               name: data.name, 
-              category: data.category, 
-              frequency: 'DAILY', 
-              userId: '' // Backend handles current user
+              category: data.category || 'OTHER', 
+              frequency: 'DAILY'
             };
             this.habitService.addHabit(habit).subscribe();
           }
@@ -60,7 +59,7 @@ export class HabitListPage implements OnInit {
     await alert.present();
   }
 
-  deleteHabit(habitId: string) {
+  deleteHabit(habitId: number) {
     this.habitService.deleteHabit(habitId).subscribe();
   }
 

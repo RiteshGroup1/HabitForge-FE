@@ -28,25 +28,26 @@ export class HabitDetailPage implements OnInit {
   }
 
   loadHabit(id: string) {
+    const numId = parseInt(id, 10);
     this.isLoading = true;
-    this.habitService.getHabitById(id).subscribe(habit => {
+    this.habitService.getHabitById(numId).subscribe(habit => {
       this.habit = habit;
-      this.loadHistory(id);
+      this.loadHistory(numId);
     });
   }
 
-  loadHistory(id: string) {
-    this.habitService.getHabitHistory(id).subscribe(logs => {
+  loadHistory(id: number) {
+    this.habitService.getHabitLogs(id).subscribe(logs => {
       this.history = logs.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.isLoading = false;
     });
   }
 
-  onToggleStatus(isCompleted: boolean) {
+  onToggleStatus(status: boolean) {
     if (this.habit) {
-      this.habitService.logHabit(this.habit.id!, isCompleted).subscribe(() => {
-        this.habit!.completedToday = isCompleted;
-        this.loadHistory(this.habit!.id!);
+      this.habitService.logHabit(this.habit.id, status).subscribe(() => {
+        this.habit!.completedToday = status;
+        this.loadHistory(this.habit!.id);
       });
     }
   }

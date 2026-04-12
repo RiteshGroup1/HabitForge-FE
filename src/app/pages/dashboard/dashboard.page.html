@@ -11,7 +11,7 @@
       </div>
       <div class="streak-badge" routerLink="/progress">
          <span class="icon">🔥</span>
-         <span class="value">{{ user?.currentStreak || 0 }}</span>
+          <span class="value">{{ progress?.currentStreak || 0 }}</span>
       </div>
     </div>
 
@@ -20,16 +20,16 @@
       <div class="level-indicator">
         <div class="level-circle">
           <span class="label">LVL</span>
-          <span class="value">{{ user?.currentLevel || 1 }}</span>
+          <span class="value">{{ progress?.level || 1 }}</span>
         </div>
       </div>
       <div class="xp-container">
         <div class="xp-header">
           <span class="xp-title">Experience Points</span>
-          <span class="xp-value">{{ user?.xpProgress || 0 }}%</span>
+          <span class="xp-value">{{ progress?.totalPoints || 0 }}</span>
         </div>
         <div class="xp-bar-outer">
-          <div class="xp-bar-inner" [style.width.%]="user?.xpProgress || 0"></div>
+          <div class="xp-bar-inner" [style.width.%]="(progress?.totalPoints || 0) % 100"></div>
         </div>
       </div>
     </div>
@@ -38,14 +38,14 @@
   <!-- Today's Progress Overview -->
   <div class="section-title">
     <h3>Today's Progress</h3>
-    <span class="percentage">{{ completionPercentage | number: '1.0-0' }}%</span>
+    <span class="percentage">{{ todayStats?.percentage || 0 | number: '1.0-0' }}%</span>
   </div>
 
   <div class="progress-box">
     <div class="progress-info">
-      <p>{{ habitsRemaining }} habits remaining</p>
+      <p>{{ (todayStats?.total || 0) - (todayStats?.completed || 0) }} habits remaining</p>
     </div>
-    <ion-progress-bar [value]="completionPercentage / 100" color="secondary" class="main-progress"></ion-progress-bar>
+    <ion-progress-bar [value]="(todayStats?.percentage || 0) / 100" color="secondary" class="main-progress"></ion-progress-bar>
   </div>
 
   <!-- Today's Habits List -->

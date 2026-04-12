@@ -13,16 +13,16 @@
     <ion-card *ngFor="let item of analytics" class="category-card">
       <ion-card-header>
         <div class="cat-header">
-          <ion-icon [name]="item.icon || 'star'" [style.color]="item.color || '#3880ff'"></ion-icon>
+          <ion-icon name="rocket-outline" color="primary"></ion-icon>
           <ion-card-title>{{ item.category }}</ion-card-title>
         </div>
-        <ion-card-subtitle>{{ item.streak }} Day Streak</ion-card-subtitle>
+        <ion-card-subtitle>{{ item.completedTasks }} Tasks Completed</ion-card-subtitle>
       </ion-card-header>
       
       <ion-card-content>
-        <div class="percentage">{{ item.successRate }}%</div>
+        <div class="percentage">{{ item.completionRate | number:'1.0-0' }}%</div>
         <div class="label">Success Rate</div>
-        <ion-progress-bar [value]="item.successRate / 100" [style.color]="item.color || '#3880ff'"></ion-progress-bar>
+        <ion-progress-bar [value]="item.completionRate / 100" color="primary"></ion-progress-bar>
       </ion-card-content>
     </ion-card>
   </div>
