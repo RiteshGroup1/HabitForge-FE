@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>{{ habit ? 'Reforge Habit' : 'Forge New Habit' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="modal-bg-glow"></div>
+  
+  <form [formGroup]="habitForm" (ngSubmit)="save()">
+    <div class="form-container">
+      <div class="input-group">
+        <ion-label class="custom-label">Habit Name</ion-label>
+        <ion-item lines="none" class="custom-input-item">
+          <ion-icon name="text-outline" slot="start"></ion-icon>
+          <ion-input formControlName="name" placeholder="E.g. Daily Meditation"></ion-input>
+        </ion-item>
+      </div>
+      
+      <div class="input-group">
+        <ion-label class="custom-label">Category</ion-label>
+        <ion-item lines="none" class="custom-input-item">
+          <ion-icon name="grid-outline" slot="start"></ion-icon>
+          <ion-select formControlName="category" interface="popover" placeholder="Select Category">
+            <ion-select-option *ngFor="let cat of categories" [value]="cat">
+              {{ cat }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="input-group">
+        <ion-label class="custom-label">Description</ion-label>
+        <ion-item lines="none" class="custom-input-item textarea-item">
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          <ion-textarea formControlName="description" rows="3" placeholder="What is your 'Why' for this habit?"></ion-textarea>
+        </ion-item>
+      </div>
+
+      <div class="input-group">
+        <ion-label class="custom-label">Frequency</ion-label>
+        <ion-segment formControlName="frequency" mode="ios" class="custom-segment">
+          <ion-segment-button value="DAILY">
+            <ion-label>Daily</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="WEEKLY">
+            <ion-label>Weekly</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="MONTHLY">
+            <ion-label>Monthly</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+    </div>
+
+    <div class="button-footer">
+      <ion-button expand="block" type="submit" [disabled]="!habitForm.valid" class="ignite-btn">
+        <ion-icon [name]="habit ? 'save-outline' : 'flame-outline'" slot="start"></ion-icon>
+        {{ habit ? 'Save Changes' : 'Ignite Habit' }}
+      </ion-button>
+      
+      <ion-button *ngIf="habit" expand="block" fill="clear" color="danger" (click)="delete()" class="delete-btn">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        Erase from Forge
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

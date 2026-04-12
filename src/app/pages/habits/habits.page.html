@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Your Forge</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="addHabit()" class="add-header-btn">
+      <ion-button (click)="openHabitModal()" class="add-header-btn">
         <ion-icon slot="icon-only" name="add-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -26,12 +26,13 @@
 
     <div *ngIf="!isLoading && habits.length > 0" class="habit-cards">
       <ion-item-sliding *ngFor="let habit of habits" class="habit-slide">
-        <div class="habit-card-wrapper" [routerLink]="['/habit-detail', habit.id]">
+        <div class="habit-card-wrapper" (click)="openHabitModal(habit)">
           <div class="card-icon">
              <ion-icon name="journal-outline" color="primary"></ion-icon>
           </div>
           <div class="card-content">
             <h3>{{ habit.name }}</h3>
+            <p class="habit-desc" *ngIf="habit.description">{{ habit.description }}</p>
             <div class="card-meta">
               <span class="category">{{ habit.category }}</span>
               <span class="dot">•</span>
@@ -57,7 +58,7 @@
       </div>
       <h2>First Seed</h2>
       <p>Every great forest begins with a single seed. Start growing your habits today.</p>
-      <ion-button expand="block" (click)="addHabit()" color="primary" class="create-btn">
+      <ion-button expand="block" (click)="openHabitModal()" color="primary" class="create-btn">
         Create Habit
       </ion-button>
     </div>

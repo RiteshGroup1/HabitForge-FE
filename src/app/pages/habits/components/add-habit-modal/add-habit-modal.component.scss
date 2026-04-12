@@ -1,0 +1,110 @@
+ion-content {
+  --background: #ffffff; /* Brighter white for background */
+  
+  .modal-bg-glow {
+    position: fixed;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(var(--ion-color-primary-rgb), 0.15) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 15px;
+}
+
+.input-group {
+  .custom-label {
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #334155; /* Darker slate color for high visibility */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+.custom-input-item {
+  --background: #f8fafc; /* Subtle off-white for input fields */
+  --border-radius: 14px;
+  --padding-start: 16px;
+  margin-bottom: 5px;
+  border: 2px solid #e2e8f0; /* Clear border */
+  transition: all 0.25s ease;
+
+  &.item-has-focus {
+    --background: #ffffff;
+    border-color: var(--ion-color-primary);
+    box-shadow: 0 0 0 4px rgba(var(--ion-color-primary-rgb), 0.1);
+  }
+
+  ion-icon {
+    font-size: 1.3rem;
+    color: var(--ion-color-primary);
+    margin-right: 12px;
+  }
+
+  ion-input, ion-select, ion-textarea {
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    font-weight: 600;
+    color: #1e293b; /* Dark text for readability */
+  }
+}
+
+.textarea-item {
+  align-items: flex-start;
+  ion-icon {
+    margin-top: 16px;
+  }
+}
+
+.custom-segment {
+  background: #f1f5f9;
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+
+  ion-segment-button {
+    --indicator-color: #ffffff;
+    --color: #64748b;
+    --color-checked: var(--ion-color-primary);
+    --border-radius: 10px;
+    font-weight: 700;
+    min-height: 44px;
+    
+    &::before {
+      display: none; /* Remove default ionic dividers */
+    }
+  }
+}
+
+.button-footer {
+  margin-top: 48px;
+  margin-bottom: 24px;
+
+  .ignite-btn {
+    --border-radius: 18px;
+    --box-shadow: 0 12px 24px rgba(var(--ion-color-primary-rgb), 0.3);
+    height: 60px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+
+  .delete-btn {
+    margin-top: 10px;
+    font-weight: 600;
+    --color: var(--ion-color-danger);
+  }
+}

@@ -4,6 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { Habit, HabitLog, TodayStats } from '../../models/habit.model';
 import { User, UserProgress } from '../../models/user.model';
 import { ProgressService } from '../../services/progress.service';
+import { ModalController, ToastController } from '@ionic/angular';
+import { AddHabitModalComponent } from '../habits/components/add-habit-modal/add-habit-modal.component';
 import { combineLatest } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -23,7 +25,9 @@ export class DashboardPage implements OnInit {
   constructor(
     private habitService: HabitService,
     private authService: AuthService,
-    private progressService: ProgressService
+    private progressService: ProgressService,
+    private modalCtrl: ModalController,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -48,6 +52,38 @@ export class DashboardPage implements OnInit {
       },
       error: () => (this.isLoading = false)
     });
+  }
+
+  async addHabit() {
+    const modal = await this.modalCtrl.create({
+      component: AddHabitModalComponent,
+      breakpoints: [0, 0.8, 1],
+      initialBreakpoint: 0.8,
+      handle: true
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    if (data) {
+      this.habitService.addHabit(data).subscribe({
+        next: () => {
+          this.showToast('Habit ignited!', 'success');
+          this.loadData(); // Refresh dashboard
+        },
+        error: () => this.showToast('Failed to create habit.', 'danger')
+      });
+    }
+  }
+
+  async showToast(message: string, color: string) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'bottom'
+    });
+    await toast.present();
   }
 
   toggleHabit(habit: Habit) {

@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HabitListPage } from './habits.page';
+import { AddHabitModalComponentModule } from './components/add-habit-modal/add-habit-modal.module';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { HabitListPage } from './habits.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    AddHabitModalComponentModule,
     RouterModule.forChild([
       {
         path: '',

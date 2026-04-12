@@ -20,8 +20,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     ReactiveFormsModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

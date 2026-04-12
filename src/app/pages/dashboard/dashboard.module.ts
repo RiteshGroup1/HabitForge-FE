@@ -4,12 +4,14 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DashboardPage } from './dashboard.page';
+import { AddHabitModalComponentModule } from '../habits/components/add-habit-modal/add-habit-modal.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AddHabitModalComponentModule,
     RouterModule.forChild([
       {
         path: '',
