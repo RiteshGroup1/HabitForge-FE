@@ -1,5 +1,7 @@
 {
   "name": "habit-tracker-app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
